@@ -1,1 +1,3 @@
 *.egg-info
+curse
+*/__pycache__/

@@ -1,8 +1,7 @@
 from .node import Node
 from .way import Way
 from .street import Street
-from util.city_graph import CityGraph
-from util import geometry
+from logistics.util import geometry, city_graph
 
 class Stop(Node):
   def __init__(self, street_id = None, direction = 0, segment = -1, *args, **kwargs):
@@ -11,7 +10,7 @@ class Stop(Node):
     self.direction = direction
     self.segment = -1
 
-  def calculate_related_street(self, city_graph: CityGraph):
+  def calculate_related_street(self, city_graph: city_graph.CityGraph):
     closest_crossroads = sorted(list(city_graph.crossroads.container.items()), lambda x: geometry.dist(self, x[1]))[:10]
     closest_road = None
     closest_road_info = None

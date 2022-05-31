@@ -3,7 +3,7 @@ import math
 
 class Node:
   def __init__(self, latitude = 0, longitude = 0, **kwargs):
-    if kwargs["id"]:
+    if "id" in kwargs:
       self.id = kwargs["id"]
     else:
       self.id = uuid.uuid4()
