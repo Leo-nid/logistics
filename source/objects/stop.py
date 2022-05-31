@@ -1,6 +1,6 @@
-from node import Node
-from way import Way
-from street import Street
+from .node import Node
+from .way import Way
+from .street import Street
 from util.city_graph import CityGraph
 from util import geometry
 
@@ -18,4 +18,4 @@ class Stop(Node):
     for crossroad in closest_crossroads:
       for way in crossroad[1].related_ways:
         if isinstance(way, Street):
-          for 
+          pass#for 

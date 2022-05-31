@@ -1,5 +1,5 @@
 import uuid
-from node import Node
+from .node import Node
 
 class Way:
   def __init__(self, nodes_id = [], *args, **kwargs):

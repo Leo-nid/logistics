@@ -1,4 +1,4 @@
-from way import Way
+from .way import Way
 
 class Street(Way):
   def __init__(self, *args, **kwargs):

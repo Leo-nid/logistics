@@ -1,4 +1,4 @@
-from ..objects import Node, Way
+from logistics.objects import Node, Way
 
 class Storage:
   def __init__(self):

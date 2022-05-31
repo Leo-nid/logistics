@@ -1,4 +1,4 @@
-from ..objects import *
+from logistics.objects import *
 import math
 import haversine
 
