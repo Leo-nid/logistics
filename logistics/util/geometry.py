@@ -21,5 +21,5 @@ def dist_to_segment(stop_lhs: Node, nodes: list[Node], haversine = True):
     closest_point = nodes[0] + part * (nodes[1] - nodes[0])
     return part, dist(stop_lhs, closest_point, haversine), sgn
   else:
-    dsts = [dist(stop_lhs, nodes[i]) for i in range(2)]
+    dsts = [dist(stop_lhs, nodes[i], haversine) for i in range(2)]
     return int(dsts[0] > dsts[1]), min(dsts), sgn

@@ -1,16 +1,19 @@
-import logistics
+from logistics.objects import *
 
 class Storage:
   def __init__(self):
     self.container = {}
 
   def add(self, object):
-    if type(object) not in [logistics.Node, logistics.Way]:
+    if type(object) not in [Node, Way]:
       raise RuntimeError("kek")
     self.container[object.id] = object
 
   def remove(self, objcet_id):
     self.container.pop(objcet_id)
+
+  def __iter__(self):
+    return self.container.__init__
 
   def __getitem__(self, key):
     if key not in self.container:
