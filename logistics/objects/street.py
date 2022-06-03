@@ -1,3 +1,5 @@
+# unused
+
 from logistics.objects.way import Way
 
 class Street(Way):

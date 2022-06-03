@@ -1,5 +1,4 @@
-from logistics.objects import *
-from logistics.util.storage import Storage
+from logistics.objects.storage import Storage
 
 class CityGraph:
   def __init__(self, 

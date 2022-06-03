@@ -7,8 +7,8 @@ class Node:
       self.id = kwargs["id"]
     else:
       self.id = uuid.uuid4()
-    self.latitude = latitude
-    self.longitude = longitude
+    self.latitude = float(latitude)
+    self.longitude = float(longitude)
     self.related_ways = set()
     self.related_relations = set()
 

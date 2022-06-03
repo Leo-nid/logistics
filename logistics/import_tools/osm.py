@@ -1,8 +1,6 @@
 import numpy
 import xml.etree.ElementTree
 
-from logistics.util.city_graph import CityGraph
-from logistics.util.storage import Storage
 from logistics.objects import *
 
 
@@ -35,8 +33,8 @@ def from_xml(path):
   for elem in root:
     if elem.tag == "node":
       is_stop = False
-      for tags in root:
-        if tags.tag == "tag" and tags["k"] == "highway" and tags["v"] == "bus_stop":
+      for tags in elem:
+        if tags.tag == "tag" and tags.attrib["k"] == "highway" and tags.attrib["v"] == "bus_stop":
           is_stop = True
       if is_stop:
         stops.add(Stop(id=elem.attrib["id"], latitude=elem.attrib["lat"], longitude=elem.attrib["lon"]))
@@ -52,18 +50,19 @@ def from_xml(path):
         if way_piece.tag == "tag":
           if way_piece.attrib["k"] == "highway" and way_piece.attrib["v"] in highway_is_road:
             is_road = True
-          elif way_piece.attrib["k"] == "building":
+          elif way_piece.attrib["k"] == "building" or way_piece.attrib["k"] == "amenity":
             is_building = True
           another_tags[way_piece.attrib["k"]] = way_piece.attrib["v"]
         elif way_piece.tag == "nd":
           connected_nodes.append(way_piece.attrib["ref"])
       if is_road:
         for node_id in connected_nodes:
-          crossroads.add(nodes[node_id])
+          if node_id in nodes:
+            crossroads.add(nodes[node_id])
         streets.add(Way(id=elem.attrib["id"], nodes_id=connected_nodes, node_storage=crossroads))
       elif is_building:
-        aprox_lon = numpy.array([float(nodes[id].longitude) for id in connected_nodes]).mean()
-        aprox_lat = numpy.array([float(nodes[id].latitude) for id in connected_nodes]).mean()
+        aprox_lon = numpy.array([float(nodes[id].longitude) for id in connected_nodes if id in nodes]).mean()
+        aprox_lat = numpy.array([float(nodes[id].latitude) for id in connected_nodes if id in nodes]).mean()
         buildings.add(Way(id=elem.attrib["id"], 
                           nodes_id=connected_nodes, 
                           tags={"lat":aprox_lat, "lon":aprox_lon, **another_tags}))

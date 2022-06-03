@@ -2,7 +2,6 @@ import pandas
 import numpy
 
 from logistics.objects import *
-from logistics.util.storage import Storage
 
 
 accommodation = [
@@ -33,19 +32,72 @@ commercial = [
   "warehouse"
 ]
 
+civic = [
+  "bakehouse",
+  "civic",
+  "college",
+  "fire_station",
+  "government",
+  "hospital",
+  "kindergarten",
+  "public",
+  "school",
+  "toilets",
+  "train_station",
+  "transportation",
+  "university"
+]
+
+amenity_sustenance = [
+  "bar",
+  "biergarten",
+  "cafe",
+  "fast_food",
+  "food_court",
+  "ice_cream",
+  "pub",
+  "restaurant"
+]
+
+amenity_education = [
+  "college",
+  "driving_school",
+  "kindergarten",
+  "language_school",
+  "library",
+  "toy_library",
+  "music_school",
+  "school",
+  "university"
+]
+
+amenity_healthcare = [
+  "baby_hatch",
+  "clinic",
+  "dentist",
+  "doctors",
+  "hospital",
+  "nursing_home",
+  "pharmacy",
+  "social_facility",
+  "veterinary"
+]
+
 
 def separate_buildings(buildings: Storage):
   accommodation_buildings = Storage()
   commercial_buildings = Storage()
   for _, building in buildings:
-    if building.tags["building"] in accommodation or building.tags["building"] == "yes":
+    if "amenity" in building.tags and building.tags["amenity"] in amenity_education + amenity_healthcare + amenity_sustenance:
+      commercial_buildings.add(building)
+    elif "building" in building.tags and building.tags["building"] in accommodation or building.tags["building"] == "yes":
       accommodation_buildings.add(building)
-    elif building.tags["building"] in commercial:
+    elif "building" in building.tags and building.tags["building"] in commercial + civic:
       commercial_buildings.add(building)
   return accommodation_buildings, commercial_buildings
 
 
-def from_storage_ways(storage, columns = []):
+def dataframe_from_storage_ways(storage, columns = []):
     dct = {}
     for column in columns:
         dct[column] = []
