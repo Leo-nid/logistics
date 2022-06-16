@@ -1,13 +1,14 @@
 from logistics.objects.node import Node
 from logistics.objects.stop import Stop
 from logistics.objects.way import Way
+from logistics.objects.relation import Relation
 
 class Storage:
   def __init__(self):
     self.container = {}
 
   def add(self, object):
-    if type(object) not in [Node, Way, Stop]:
+    if type(object) not in [Node, Way, Stop, Relation]:
       raise RuntimeError("kek")
     self.container[object.id] = object
 

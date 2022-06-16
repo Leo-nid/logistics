@@ -11,6 +11,8 @@ class Node:
     self.longitude = float(longitude)
     self.related_ways = set()
     self.related_relations = set()
+    if "tags" in kwargs:
+      self.tags = kwargs["tags"]
 
   def __sub__(self, oth):
     return NodeDiff(self.latitude - oth.latitude, self.longitude - oth.longitude)

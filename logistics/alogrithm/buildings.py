@@ -90,7 +90,7 @@ def separate_buildings(buildings: Storage):
   for _, building in buildings:
     if "amenity" in building.tags and building.tags["amenity"] in amenity_education + amenity_healthcare + amenity_sustenance:
       commercial_buildings.add(building)
-    elif "building" in building.tags and building.tags["building"] in accommodation or building.tags["building"] == "yes":
+    elif "building" in building.tags and (building.tags["building"] in accommodation or building.tags["building"] == "yes"):
       accommodation_buildings.add(building)
     elif "building" in building.tags and building.tags["building"] in commercial + civic:
       commercial_buildings.add(building)

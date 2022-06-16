@@ -5,8 +5,10 @@ class CityGraph:
                crossroads:Storage = Storage(), 
                streets:Storage = Storage(), 
                stops:Storage = Storage(),
-                haversine=True):
+               routes:Storage = Storage(),
+               haversine=True):
     self.crossroads = crossroads
     self.streets = streets
     self.stops = stops
+    self.routes = routes
     self.haversine = haversine

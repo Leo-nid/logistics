@@ -4,5 +4,5 @@
 # from logistics.objects.sectors import Sectors
 
 # class CorrespondenceMatrix:
-#   def __init__(self, sectors: Sectors, ):
+#   def __init__(self, sectors: Sectors, distances):
     
